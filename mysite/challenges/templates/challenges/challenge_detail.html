@@ -1,0 +1,17 @@
+{% extends "challenges/base.html" %}
+{% block content %}
+<div>
+    {% if mountains_list %}
+        <ol>
+            {% for mountain in mountains_list %}
+                <li>
+                    <a href="/challenges/{{ challenge_name }}/{{ mountain.mnt_name }}">{{ mountain.mnt_name}}</a>
+                    {{ mountain.done }}
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No Mountains To Display.</p>
+    {% endif %}
+</div>
+{% endblock content %}

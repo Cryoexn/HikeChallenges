@@ -1,0 +1,84 @@
+{% extends "challenges/base.html" %}
+{% block content %}
+<div class="container-fluid">
+    {% if mountain %}
+        <h1>{{ mountain.mnt_name }}, {{ mountain.location_city }}</h1>
+            <div class="col-md-12">
+                <h3>Weather Projections</h3>
+                <p class="text-muted">
+
+                    {% if curr_days and week_days and week_nights %}
+
+                    <!-- Weather -->
+                    
+                    <div class="row padding">  <!-- Today and Tonight row -->
+                        {% for day in curr_days %}
+                            {% if day.name == "Today" or day.name == "This Afternoon" %}
+                                <div class="content-section col-md-3 text-white" style="background-color:#134163">
+                                    <h3 class="border-bottom text-center text-white">{{ day.name }}</h3>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" style="background-color:#2395BC">
+                                            <p class="border-bottom m-0">temp</p>
+                                            {{ day.temp }} F
+                                        </li>
+                                        <li class="list-group-item" style="background-color:#2395BC">
+                                            <p class="border-bottom m-0">wind</p>
+                                            {{ day.wSpeed }}
+                                        </li>
+                                        <li class="list-group-item" style="background-color:#2395BC">
+                                            <p class="border-bottom">forecast details</p>
+                                            <p>{{ day.dForecast }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% elif day.name == "Tonight" %}
+                                <div class="content-section col-md-3 text-white" style="background-color:#134163">
+                                    <h3 class="border-bottom text-center text-white">{{ day.name }}</h3>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" style="background-color:#2395BC">
+                                            <p class="border-bottom m-0">temp</p>{{ day.temp }} F
+                                        </li>
+                                        <li class="list-group-item" style="background-color:#2395BC">
+                                            <p class="border-bottom">wind</p>{{ day.wSpeed }}
+                                        </li>
+                                        <li class="list-group-item" style="background-color:#2395BC">
+                                            <p class="border-bottom">forecast details</p><p>{{ day.dForecast }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endfor %}  
+                    </div>
+                    <div class="row padding">  <!-- Weekdays row -->
+                        {% for day in week_days %}
+                        {% if "Night" in day.name or "night" in day.name %}
+                        <div class="content-section col-sm-12 col-md-6 col-lg-3 col-xl-1 text-white" style="background-color:#134163">
+                            <h3 class="border-bottom text-center text-white">{{ day.name }}</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">temp</p>{{ day.temp }} F</li>
+                                <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">wind</p>{{ day.wSpeed }}</li>
+                                <li class="list-group-item" style="background-color:#2395BC"><button type="button" class="btn btn-outline-dark btn-sm">more ...</button></li>
+                            </ul>
+                        </div>
+                        {% else %}
+                        <div class="content-section col-sm-12 col-md-6 col-lg-3 col-xl-1 text-white" style="background-color:#134163">
+                            <h3 class="border-bottom text-center text-white">{{ day.name }}</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">temp</p>{{ day.temp }} F</li>
+                                <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">wind</p>{{ day.wSpeed }}</li>
+                                <li class="list-group-item" style="background-color:#2395BC"><button type="button" class="btn btn-outline-dark btn-sm">more ...</button></li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                    </div> <!-- End Weather -->
+
+                    {% else %}
+                        <p>{{ error_msg }}</p>
+                    {% endif %}
+                </p>
+            </div>
+    {% endif %}
+</div>
+{% endblock content %}

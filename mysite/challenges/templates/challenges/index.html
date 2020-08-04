@@ -1,0 +1,14 @@
+{% extends "challenges/base.html" %}
+{% block content %}
+    <div>
+        {% if challenge_list %}
+            <ul>
+                {% for challenge in challenge_list %}
+                    <li><a href="/challenges/{{ challenge.challenge_name }}/">{{ challenge.challenge_name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No Challenges available.</p>
+        {% endif %}
+    </div>
+{% endblock content %}
