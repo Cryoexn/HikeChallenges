@@ -18,15 +18,10 @@
                                             <p class="border-bottom m-0">temp</p>
                                             {{ day.temp }} F
                                         </li>
-                                        
                                         <li class="list-group-item" style="background-color:#2395BC">
                                             <p class="border-bottom m-0">precip</p>
-                                            {{ day.precip }} 
-                                            {% if day.precip%}
-                                                %
-                                            {% endif %}
+                                            {{ day.precip }} %
                                         </li>
-
                                         <li class="list-group-item" style="background-color:#2395BC">
                                             <p class="border-bottom m-0">wind</p>
                                             {{ day.wSpeed }}
@@ -47,14 +42,12 @@
 
                                         <li class="list-group-item" style="background-color:#2395BC">
                                             <p class="border-bottom m-0">precip</p>
-                                            {{ day.precip }}
-                                            {% if day.precip%}
-                                                %
-                                            {% endif %}
+                                            {{ day.precip }} %
                                         </li>
 
                                         <li class="list-group-item" style="background-color:#2395BC">
-                                            <p class="border-bottom">wind</p>{{ day.wSpeed }}
+                                            <p class="border-bottom m-0">wind</p>
+                                            {{ day.wSpeed }}
                                         </li>
                                         <li class="list-group-item" style="background-color:#2395BC">
                                             <p class="border-bottom">forecast details</p><p>{{ day.dForecast }}</p>
@@ -76,10 +69,7 @@
                                     <p class="border-bottom m-0">
                                         precip
                                     </p>
-                                    {{ day.precip }} 
-                                    {% if day.precip%}
-                                        %
-                                    {% endif %}
+                                    {{ day.precip }} %
                                 </li>
 
                                 <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">wind</p>{{ day.wSpeed }}</li>
@@ -96,10 +86,7 @@
                                     <p class="border-bottom m-0">
                                         precip
                                     </p>
-                                    {{ day.precip }}
-                                    {% if day.precip%}
-                                        %
-                                    {% endif %}
+                                    {{ day.precip }} %
                                 </li>
 
                                 <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">wind</p>{{ day.wSpeed }}</li>

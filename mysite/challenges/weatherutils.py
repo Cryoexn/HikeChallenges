@@ -16,7 +16,7 @@ class WeatherDay:
 
 def get_precip(detailedForecast):
 
-    chance = None
+    chance = 0
 
     if 'precipitation is' in detailedForecast:
         index = detailedForecast.find('precipitation is') + 17
