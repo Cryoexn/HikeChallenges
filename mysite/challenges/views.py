@@ -44,10 +44,12 @@ def mountain_detail_view(request, challenge_name, mnt_name):
             'curr_days'  : weather[0],
             'week_days'  : weather[1],
             'week_nights': weather[2],
+            'rel_city'   : weather[3],
         }
     else:
         context = {
             'mountain'   : mountain,
+            'rel_city'   : "N/A",
             'curr_days'  : None,
             'week_days'  : None,
             'week_nights': None,
