@@ -2,8 +2,9 @@ import requests
 import json
 
 class WeatherDay:
-    def __init__(self, name, temp, wSpeed, wDir, dForecast, hurl):
+    def __init__(self, name, precip, temp, wSpeed, wDir, dForecast, hurl):
         self.name = name
+        self.precip = precip
         self.temp = temp
         self.wSpeed = wSpeed
         self.wDir = wDir
@@ -13,7 +14,15 @@ class WeatherDay:
     def get_hourly(self):
         response = requests.get(hourly_url)
 
+def get_precip(detailedForecast):
 
+    chance = None
+
+    if 'precipitation is' in detailedForecast:
+        index = detailedForecast.find('precipitation is') + 17
+        chance = detailedForecast[index : index + 4].replace('%', '').replace('.', '').replace(' ', '')
+        
+    return chance
 
 def get_weather(longitude, latitude):
 
@@ -22,6 +31,7 @@ def get_weather(longitude, latitude):
     if properties:
         forecast_url  = properties['forecast']
         hForecase_url = properties['forecastHourly']
+        relative_city = properties['relativeLocation']['properties']['city']
 
         response = requests.get(forecast_url)
 
@@ -47,14 +57,16 @@ def get_weather(longitude, latitude):
                 day['windSpeed'] = day['windSpeed'].replace(" to ", "-")
 
                 if day['name'] == "Today" or day['name'] == "Tonight" or day['name'] == "This Afternoon":
-                    curr_days.append(WeatherDay(day['name'], day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
+                    curr_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
                 elif "Night" in day['name']:
-                    week_nights.append(WeatherDay(day['name'], day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
+                    week_nights.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
                 else:
-                    week_days.append(WeatherDay(day['name'], day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
+                    week_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
         else:
             return None
     else:
         return None
 
-    return (curr_days, week_days, week_nights)
+    return (curr_days, week_days, week_nights, relative_city)
+
+    
