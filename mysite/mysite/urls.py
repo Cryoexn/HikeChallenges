@@ -20,6 +20,5 @@ from portfolio import views as portfolio_views
 urlpatterns = [
     path('', portfolio_views.home_view, name='Home'),
     path('challenges/', include('challenges.urls')),
-    path('weather/', include('weather.urls')),
     path('admin/', admin.site.urls),
 ]

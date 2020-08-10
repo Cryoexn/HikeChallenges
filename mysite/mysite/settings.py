@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'portfolio.apps.PortfolioConfig',
     'challenges.apps.ChallengesConfig',
-    'weather.apps.WeatherConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
