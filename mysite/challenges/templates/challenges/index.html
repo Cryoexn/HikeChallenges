@@ -1,14 +1,18 @@
-{% extends "challenges/base.html" %}
+{% extends "portfolio/base.html" %}
 {% block content %}
-    <div>
-        {% if challenge_list %}
-            <ul>
-                {% for challenge in challenge_list %}
-                    <li><a href="/challenges/{{ challenge.challenge_name }}/">{{ challenge.challenge_name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No Challenges available.</p>
-        {% endif %}
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="content-section">
+                {% if challenge_list %}
+                    <ul>
+                        {% for challenge in challenge_list %}
+                            <li><a href="/challenges/{{ challenge.challenge_name }}/">{{ challenge.challenge_name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No Challenges available.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock content %}

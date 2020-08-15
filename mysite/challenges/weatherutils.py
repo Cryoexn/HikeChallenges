@@ -21,7 +21,10 @@ def get_precip(detailedForecast):
     if 'precipitation is' in detailedForecast:
         index = detailedForecast.find('precipitation is') + 17
         chance = detailedForecast[index : index + 4].replace('%', '').replace('.', '').replace(' ', '')
-        
+    
+    if chance == 0:
+        chance = "< 10"
+
     return chance
 
 def get_weather(longitude, latitude):

@@ -17,7 +17,7 @@
     
     <link rel="stylesheet" type="text/css" href="{% static 'challenges/main.css' %}">
 
-    <title>Portfolio</title>
+    <title>David Pitoniak Portfolio</title>
 </head>
 <body>
     <header class="site-header">
@@ -29,6 +29,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'Home' %}">Home</a>
                 </div>
                 <!-- Navbar Right Side 
                 <div class="navbar-nav">
@@ -41,24 +42,8 @@
         </nav>
     </header>
     <main role="main">
-        <div class="row">
-            <div class="col-sm-12 col-md-8 ml-2">
-                <div class="content-section">
-                    {% block content %}{% endblock content %}
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-2 ml-2">
-            <div class="content-section">
-                <h3>Active Web Apps</h3>
-                <p class='text-muted'>
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-light">
-                        <a href="{% url 'index_chall' %}">Hike Challenge App</a>
-                    </li>
-                </ul>
-                </p>
-            </div>
-            </div>
+        <div class="container-fluid">
+            {% block content %}{% endblock content %}
         </div>
     </main>
 
