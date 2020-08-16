@@ -1,4 +1,4 @@
-{% extends "portfolio/base.html" %}
+{% extends "challenges/base.html" %}
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-4 transparent">
@@ -7,7 +7,7 @@
                 <ol>
                     {% for mountain in mountains_list %}
                         <li>
-                            <a href="/challenges/{{ challenge_name }}/{{ mountain.mnt_name }}">{{ mountain.mnt_name}}</a>
+                            <a class="a-color" href="/challenges/{{ challenge_name }}/{{ mountain.mnt_name }}">{{ mountain.mnt_name}}</a>
                         </li>
                     {% endfor %}
                 </ol>

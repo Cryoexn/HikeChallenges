@@ -1,61 +1,65 @@
-{% extends "portfolio/base.html" %}
+{% extends "challenges/base.html" %}
 {% block content %}
 <div class="container-fluid">
     {% if mountain %}
-        <h1>{{ mountain.mnt_name }}, {{ rel_city }}</h1>
-            <div class="content-section col-md-6">
-                <h3>Hike Information</h3>
+        <h1 class="border-bottom border-dark">{{ mountain.mnt_name }}, {{ rel_city }}</h1>
+            <div class="row justify-content-center">
+            <div class="content-section col-sm-12 col-md-12 col-lg-6">
+                <h3 class="border-bottom">Hike Information</h3>
+                <p>Peak Location: ({{mountain.longitude}},{{mountain.latitude}})</p>
                 <p>Elevation: {{ mountain.elevation }}</p>
                 <p>Completed: {{ mountain.done }}</p>
                 <p>Date Done: {{ mountain.date_done }}</p>
             </div>
-            <div class="col-md-12">
-                <h3>Weather Projections</h3>
+            </div>
+            <div class="row justify-content-center">
+                <h1 class="">Weather Projections</h2>
+            </div>
                 <p class="text-muted">
                     {% if curr_days and week_days and week_nights %}
                     <!-- Weather -->
-                    <div class="row padding">  <!-- Today and Tonight row -->
+                    <div class="row padding justify-content-center">  <!-- Today and Tonight row -->
                         {% for day in curr_days %}
                             {% if day.name == "Today" or day.name == "This Afternoon" %}
-                                <div class="content-section col-md-3 col-lg-6 text-white" style="background-color:#134163">
+                                <div class="content-section col-sm-12 col-lg-4 text-white m-1 bg-day-outer">
                                     <h3 class="border-bottom text-white">{{ day.name }}</h3>
                                     <ul class="list-group">
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-day-inner">
                                             <p class="border-bottom m-0">temp</p>
                                             {{ day.temp }} F
                                         </li>
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-day-inner">
                                             <p class="border-bottom m-0">precip</p>
                                             {{ day.precip }} %
                                         </li>
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-day-inner">
                                             <p class="border-bottom m-0">wind</p>
                                             {{ day.wSpeed }}
                                         </li>
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-day-inner">
                                             <p class="border-bottom">forecast details</p>
                                             <p>{{ day.dForecast }}</p>
                                         </li>
                                     </ul>
                                 </div>
                                 {% elif day.name == "Tonight" %}
-                                <div class="content-section col-md-3 col-lg-6 text-white" style="background-color:#134163">
+                                <div class="content-section col-sm-12 col-lg-4 text-white m-1 bg-night-outer">
                                     <h3 class="border-bottom text-white">{{ day.name }}</h3>
                                     <ul class="list-group">
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-night-inner">
                                             <p class="border-bottom m-0">temp</p>{{ day.temp }} F
                                         </li>
 
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-night-inner">
                                             <p class="border-bottom m-0">precip</p>
                                             {{ day.precip }} %
                                         </li>
 
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-night-inner">
                                             <p class="border-bottom m-0">wind</p>
                                             {{ day.wSpeed }}
                                         </li>
-                                        <li class="list-group-item" style="background-color:#2395BC">
+                                        <li class="list-group-item bg-night-inner">
                                             <p class="border-bottom">forecast details</p><p>{{ day.dForecast }}</p>
                                         </li>
                                     </ul>
@@ -63,29 +67,14 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div class="row padding">  <!-- Weekdays row -->
+                    <div class="row padding justify-content-center">  <!-- Weekdays row -->
                         {% for day in week_days %}
-                        {% if "Night" in day.name or "night" in day.name %}
-                        <div class="content-section col-sm-12 col-md-2 text-white" style="background-color:#134163">
+                        <div class="content-section col-sm-12 col-md-2 col-lg-2 col-xl-1 text-white m-1 bg-day-outer">
                             <h3 class="border-bottom text-white">{{ day.name }}</h3>
                             <ul class="list-group">
-                                <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">temp</p>{{ day.temp }} F</li>
-
-                                <li class="list-group-item" style="background-color:#2395BC">
-                                    <p class="border-bottom m-0">
-                                        precip
-                                    </p>
-                                    {{ day.precip }} %
-                                </li>
-                            </ul>
-                        </div>
-                        {% else %}
-                        <div class="content-section col-sm-12 col-md-2 text-white" style="background-color:#134163">
-                            <h3 class="border-bottom text-white">{{ day.name }}</h3>
-                            <ul class="list-group">
-                                <li class="list-group-item" style="background-color:#2395BC"><p class="border-bottom m-0">temp</p>{{ day.temp }} F</li>
+                                <li class="list-group-item bg-day-inner"><p class="border-bottom m-0">temp</p>{{ day.temp }} F</li>
                                 
-                                <li class="list-group-item" style="background-color:#2395BC">
+                                <li class="list-group-item bg-day-inner">
                                     <p class="border-bottom m-0">
                                         precip
                                     </p>
@@ -93,16 +82,31 @@
                                 </li>
                             </ul>
                         </div>
-                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="row padding justify-content-center">  <!-- Weeknights row -->
+                        {% for night in week_nights %}
+                        <div class="content-section col-sm-12 col-md-2 col-lg-2 col-xl-1 text-white m-1 bg-night-outer">
+                            <h3 class="border-bottom text-white">{{ night.name }}</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item bg-night-inner"><p class="border-bottom m-0">temp</p>{{ night.temp }} F</li>
+
+                                <li class="list-group-item bg-night-inner">
+                                    <p class="border-bottom m-0">
+                                        precip
+                                    </p>
+                                    {{ night.precip }} %
+                                </li>
+                            </ul>
+                        </div>
                         {% endfor %}
 
-                    </div> <!-- End Weather -->
-
                     {% else %}
+                    <div class=content-section>
                         <p>{{ error_msg }}</p>
+                    </div>
                     {% endif %}
                 </p>
-            </div>
     {% endif %}
 </div>
 {% endblock content %}

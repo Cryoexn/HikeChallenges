@@ -62,6 +62,7 @@ def get_weather(longitude, latitude):
                 if day['name'] == "Today" or day['name'] == "Tonight" or day['name'] == "This Afternoon":
                     curr_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
                 elif "Night" in day['name']:
+                    day['name'] = day['name'].replace("Night", "N")
                     week_nights.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
                 else:
                     week_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))

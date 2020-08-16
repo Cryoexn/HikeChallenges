@@ -49,10 +49,10 @@ def mountain_detail_view(request, challenge_name, mnt_name):
     else:
         context = {
             'mountain'   : mountain,
-            'rel_city'   : "N/A",
             'curr_days'  : None,
             'week_days'  : None,
             'week_nights': None,
+            'rel_city'   : "N/A",
             'error_msg'  : "Weather could not be fetched. Try refreshing the page.",
         }
 

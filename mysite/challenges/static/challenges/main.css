@@ -33,20 +33,32 @@
   }
   
   .half-bottom-border {
-    border-bottom: 2px soild #ffffff;
+    border-bottom: 2px soild #6e6e6e;
     position: absolute;
     left: 50%;
     right: 0;
   }
 
+  .a-color {
+    color: #000000;
+  }
+
   .content-section {
-    background: #ffffff;
+    background: #e9e9e98f;
     padding: 10px 20px;
-    border: 1px solid #dddddd;
+    border: 1px solid #5f788a;
     border-radius: 3px;
     margin-bottom: 20px;
   }
   
+  .content-section-light {
+    background: #fffafa46;
+    padding: 10px 20px;
+    border: 1px solid #5f788a;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+
   .article-title {
     color: #444444;
   }
@@ -92,4 +104,20 @@
   
   .account-heading {
     font-size: 2.5rem;
+  }
+
+  .bg-night-outer {
+    background-color:#134063a8;
+  }
+
+  .bg-night-inner {
+    background-color:#1a6983dc;
+  }
+
+  .bg-day-outer {
+    background-color:#06afe7a8;
+  }
+
+  .bg-day-inner {
+    background-color:#3688a3dc;
   }
