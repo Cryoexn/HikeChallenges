@@ -1,14 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from django.contrib.auth.decorators import login_required
 from .weatherutils import get_weather
 from .models import Challenge, Mountain
 
-
-def home_view(request):
-    return render(request, 'challenges/home.html')
-
 def index_view(request):
-
     try:
         # Get the list of challenges listed by name.
         challenge_list = Challenge.objects.order_by('challenge_name')
@@ -29,6 +25,7 @@ def challenge_detail_view(request, challenge_name):
 
     return render(request, 'challenges/challenge_detail.html', {'challenge_name' : challenge_name, 'mountains_list' : mountains_list,})
 
+@login_required
 def mountain_detail_view(request, challenge_name, mnt_name):
     try:
         mountain = Mountain.objects.get(mnt_name=mnt_name)
