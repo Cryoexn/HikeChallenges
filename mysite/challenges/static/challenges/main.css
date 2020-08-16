@@ -1,4 +1,4 @@
-body {
+  body {
     background: #fafafa;
     color: #333333;
     margin-top: 5rem;
@@ -8,13 +8,12 @@ body {
     color: #444444;
   }
   
-  ul {
-    margin: 0;
+  .trans {
+    background-color: rgba(0,0,0,0.5);
   }
 
-  .bg-mnt {
-    /* The image used */
-    background-image: url("/static/challenges/mnt.jpg");
+  ul {
+    margin: 0;
   }
   
   .bg-steel {
