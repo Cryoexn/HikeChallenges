@@ -12,6 +12,11 @@ body {
     margin: 0;
   }
 
+  .bg-mnt {
+    /* The image used */
+    background-image: url("/static/challenges/mnt.jpg");
+  }
+  
   .bg-steel {
     background-color: #5f788a;
   }
