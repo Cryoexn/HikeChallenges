@@ -1,18 +1,8 @@
 {% extends "challenges/base.html" %}
 {% block content %}
 <div class="row justify-content-center">
-    {% if user.is_authenticated == False %}
-        <div class="col-4">
-            <div class="content-section-light">
-                <p class="text-muted">You need to login to view mountain details.</p>
-            </div>
-        </div>
-    {% endif %} 
-</div>
-<div class="row justify-content-center">
     <div class="col-4">
         <div class="content-section">
-           
             {% if mountains_list %}
                 <ol>
                     {% for mountain in mountains_list %}
@@ -24,6 +14,13 @@
             {% else %}
                 <p>No Mountains To Display.</p>
             {% endif %}
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="content-section">
+            <div class="row justify-content-center">
+                <h1 class="border-bottom border-dark">Challenge Summary</h1>
+            </div>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ from .weatherutils import get_weather
 from .models import Challenge, Mountain
 from users.models import Achievement
 from datetime import datetime
+from django.contrib import messages
 
 def index_view(request):
     try:
@@ -24,6 +25,9 @@ def challenge_detail_view(request, challenge_name):
 
     except Challenge.DoesNotExist:
         raise Http404(challenge_name + " Challenge does not exist.")
+    
+    if not request.user.is_authenticated:
+        messages.warning(request, 'You need to be logged in to view mountains.')
 
     return render(request, 'challenges/challenge_detail.html', {'challenge_name' : challenge_name, 'mountains_list' : mountains_list,})
 
@@ -52,6 +56,7 @@ def mountain_detail_view(request, challenge_name, mnt_name):
     if weather:
         context = {
             'mountain'   : mountain,
+            'challenge_name': challenge_name,
             'completed'  : completed,
             'date_completed'  : date_completed,
             'curr_days'  : weather[0],
@@ -71,3 +76,21 @@ def mountain_detail_view(request, challenge_name, mnt_name):
         }
 
     return render(request, 'challenges/mountain_detail.html', context)
+
+def achievement_edit_view(request, challenge_name, mnt_name):
+    if request.user.is_authenticated:
+        user_achievements = Achievement.objects.filter(user=request.user)
+    
+    ach = Achievement(user=request.user)
+
+    for achievement in user_achievements:
+        if achievement.mountain_completed:
+            if achievement.mountain_completed.mnt_name == mnt_name:
+                ach = achievement
+
+    context = {
+        'mnt_name'   : mnt_name,
+        'achievement': ach,
+    }
+
+    return render(request, 'challenges/achievement_edit.html', context)

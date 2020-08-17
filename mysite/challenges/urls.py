@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/', user_views.profile_view, name='profile'),
     path('<challenge_name>/', views.challenge_detail_view, name='detail_chall'),
     path('<challenge_name>/<mnt_name>/', views.mountain_detail_view, name='detail_mnt'),
+    path('<challenge_name>/<mnt_name>/achievement_edit/', views.achievement_edit_view, name='achievement_edit'),
 ]

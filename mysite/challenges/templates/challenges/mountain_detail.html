@@ -14,7 +14,7 @@
                     <li>Date Completed: {{ date_completed }}</li>
                 </ul>
                 <div class="row justify-content-center">
-                    <a class="btn btn-outline-secondary btn-sm" href="#">edit</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'achievement_edit' challenge_name mountain.mnt_name %}">edit</a>
                 </div>
             </div>
         </div>

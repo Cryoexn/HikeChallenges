@@ -6,7 +6,7 @@
                 {% if challenge_list %}
                     <ul>
                         {% for challenge in challenge_list %}
-                            <li><a class="a-color" href="/challenges/{{ challenge.challenge_name }}/">{{ challenge.challenge_name }}</a></li>
+                            <li><a class="a-color" href="{% url 'detail_chall' challenge.challenge_name %}">{{ challenge.challenge_name }}</a></li>
                         {% endfor %}
                     </ul>
                 {% else %}

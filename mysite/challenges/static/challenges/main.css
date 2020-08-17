@@ -7,17 +7,13 @@
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
   }
-  
-  .trans {
-    background-color: rgba(0,0,0,0.5);
-  }
 
   ul {
     margin: 0;
   }
   
   .bg-steel {
-    background-color: #5f788a;
+    background-color: #5f788abe;
   }
   
   .site-header .navbar-nav .nav-link {
@@ -57,6 +53,19 @@
     border: 1px solid #5f788a;
     border-radius: 3px;
     margin-bottom: 20px;
+  }
+
+  .content-section-warning {
+    background: #ff9393be;
+    padding: 10px 20px;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+
+  .message-fmt {
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
   }
 
   .article-title {
