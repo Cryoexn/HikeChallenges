@@ -14,7 +14,7 @@
     
     <link rel="stylesheet" type="text/css" href="{% static 'challenges/main.css' %}">
 
-    <title>Adk Hiking Challenges</title>
+    <title>Hike Challenges</title>
 
     <style type="text/css">
 
@@ -35,7 +35,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #5f788ac2;">
             <div class="container-fluid">
             <a class="navbar-brand mr-4" href="{% url 'index_chall' %}">
-                David Pitoniak (Adk Hiking Challenges)
+                David Pitoniak (Hike Challenges)
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -61,16 +61,17 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 {% if messages %}
-                <div class="col-11">
                     {% for message in messages %}
-                    <div class="row alert-info justify-content-center mb-2 p-2 message-fmt">
-                        {{ message }}
-                    </div>
+                        <div class="col-12">
+                            <div class="content-section">
+                                <div class="row justify-content-center">
+                                    {{ message }}
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
-                </div>
                 {% endif %}
             </div>
-            
             {% block content %}{% endblock content %}
         </div>
     </main>

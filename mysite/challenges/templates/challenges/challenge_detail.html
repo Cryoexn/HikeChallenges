@@ -1,9 +1,10 @@
 {% extends "challenges/base.html" %}
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-4">
+    <div class="col-md-12 col-lg-4">
         <div class="content-section">
             {% if mountains_list %}
+                <h2 class="border-bottom border-dark">{{ challenge_name }} Mountain List</h2>
                 <ol>
                     {% for mountain in mountains_list %}
                         <li>
@@ -16,11 +17,50 @@
             {% endif %}
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-md-12 col-lg-8">
         <div class="content-section">
-            <div class="row justify-content-center">
-                <h1 class="border-bottom border-dark">Challenge Summary</h1>
+            <div class="row pl-3">
+                <h2 class="border-bottom border-dark">{{ challenge_name }} Summary</h2>
             </div>
+            {% if user.is_authenticated %}
+            <div class="row justify-content-right pl-3">
+                <div class="col-4">
+                    <h3>Mountains Progress:</h3>
+                </div>
+                <div class="pr-2">
+                    {{ mountain_progress }} %
+                </div>
+                <div class="col-6 p-0" style="background-color: #dedede; height: 24px;">
+                    <div class="col-12" style="background-color: #70ff69; height: 24px; width:{{ mountain_progress }}%"></div>
+                </div>
+            </div>
+            <div class="row justify-content-right pl-3">
+                <div class="col-4">
+                    <h3>Elevation Progress:</h3>
+                </div>
+                <div class="pr-2">
+                    {{ elevation_progress }} %
+                </div>
+                <div class="col-6 p-0" style="background-color: #dedede; height: 24px;">
+                    <div class="col-12" style="background-color: #70ff69; height: 24px; width:{{ elevation_progress }}%"></div>
+                </div>
+            </div>
+            <div class="row justify-content-right pl-3">
+                <div class="col-4">
+                    <h3>Distance  Progress:</h3>
+                </div>
+                <div class="pr-2">
+                    {{ distance_progress }} %
+                </div>
+                <div class="col-6 p-0" style="background-color: #dedede; height: 24px;">
+                    <div class="col-12" style="background-color: #70ff69; height: 24px; width:{{ distance_progress }}%"></div>
+                </div>
+            </div>
+            {% else %}
+                <div>
+                    Login to see your progression for this challenge.
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

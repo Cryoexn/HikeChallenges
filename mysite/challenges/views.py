@@ -21,15 +21,59 @@ def challenge_detail_view(request, challenge_name):
         # If the challenge exists in the database display the details page.
         challenge = Challenge.objects.get(challenge_name=challenge_name)
 
-        mountains_list = challenge.mountains.all()
+        mountain_list = challenge.mountains.all()
 
     except Challenge.DoesNotExist:
         raise Http404(challenge_name + " Challenge does not exist.")
     
-    if not request.user.is_authenticated:
-        messages.warning(request, 'You need to be logged in to view mountains.')
+    # Check if the user is authenticated.
+    # if the user is authenticated give details about the challenge.
+    # if the user is not authenticated send no details.
 
-    return render(request, 'challenges/challenge_detail.html', {'challenge_name' : challenge_name, 'mountains_list' : mountains_list,})
+    ach_list = None
+    
+    if request.user.is_authenticated:
+        ach_list = Achievement.objects.filter(user=request.user)
+    
+    mnt_progress = 0
+    elv_progress = 0
+    dis_progress = 0
+
+    total_elv = 0
+    total_dis = 0
+
+    if ach_list:
+        for ach in ach_list:
+            if ach.mountain_completed:
+                for mountain in mountain_list:
+                    total_elv += mountain.elevation
+                    total_dis += mountain.distance
+                    if ach.mountain_completed.mnt_name == mountain.mnt_name:
+                        mnt_progress += 1
+                        elv_progress += mountain.elevation
+                        dis_progress += mountain.distance 
+
+        if len(mountain_list) > 0:
+            mnt_progress = round((mnt_progress / len(mountain_list)) * 100)
+
+        if total_elv > 0:    
+            elv_progress = round((elv_progress / total_elv) * 100)
+
+        if total_dis > 0:
+            dis_progress = round((dis_progress / total_dis) * 100)
+
+    if not request.user.is_authenticated:
+        messages.warning(request, 'You need to be logged in to view mountain details. You will be redirected to login page.')
+
+    context = {
+        'mountain_progress' : mnt_progress,
+        'elevation_progress' : elv_progress,
+        'distance_progress' : dis_progress,
+        'challenge_name' : challenge_name,
+        'mountains_list' : mountain_list,
+    }
+
+    return render(request, 'challenges/challenge_detail.html', context)
 
 @login_required
 def mountain_detail_view(request, challenge_name, mnt_name):
