@@ -1,17 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
-from .weatherutils import get_weather
-from .models import Challenge, Mountain
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+
 from users.models import Achievement
 from datetime import datetime
-from django.contrib import messages
+
+from .models import Challenge, Mountain
+from .forms import AchievementForm
+from .weatherutils import get_weather
 
 def index_view(request):
     try:
         # Get the list of challenges listed by name.
         challenge_list = Challenge.objects.order_by('challenge_name')
-    except Challenge.DoesNotExist:
+    except ObjectDoesNotExist:
         raise Http404('There are currently no challenges.')
 
     return render(request, 'challenges/index.html', {'challenge_list' : challenge_list,})
@@ -23,15 +27,14 @@ def challenge_detail_view(request, challenge_name):
 
         mountain_list = challenge.mountains.all()
 
-    except Challenge.DoesNotExist:
+    except ObjectDoesNotExist:
         raise Http404(challenge_name + " Challenge does not exist.")
+
+    ach_list = None
     
     # Check if the user is authenticated.
     # if the user is authenticated give details about the challenge.
     # if the user is not authenticated send no details.
-
-    ach_list = None
-    
     if request.user.is_authenticated:
         ach_list = Achievement.objects.filter(user=request.user)
     
@@ -79,7 +82,7 @@ def challenge_detail_view(request, challenge_name):
 def mountain_detail_view(request, challenge_name, mnt_name):
     try:
         mountain = Mountain.objects.get(mnt_name=mnt_name)
-    except Mountain.DoesNotExist:
+    except ObjectDoesNotExist:
         raise Http404(mnt_name + " does not exist.")
     
     if request.user.is_authenticated:
@@ -97,7 +100,7 @@ def mountain_detail_view(request, challenge_name, mnt_name):
     # icons link might be broken for api queries.
     weather = get_weather(mountain.longitude, mountain.latitude)
 
-    if weather:
+    if len(weather) > 1:
         context = {
             'mountain'   : mountain,
             'challenge_name': challenge_name,
@@ -111,12 +114,13 @@ def mountain_detail_view(request, challenge_name, mnt_name):
     else:
         context = {
             'mountain'   : mountain,
+            'challenge_name' : challenge_name,
             'completed'  : None,
             'curr_days'  : None,
             'week_days'  : None,
             'week_nights': None,
             'rel_city'   : "N/A",
-            'error_msg'  : "Weather could not be fetched. Try refreshing the page.",
+            'error_msg'  : f"Weather could not be fetched. { weather }. Try refreshing the page.",
         }
 
     return render(request, 'challenges/mountain_detail.html', context)
@@ -127,13 +131,18 @@ def achievement_edit_view(request, challenge_name, mnt_name):
     
     ach = Achievement(user=request.user)
 
-    for achievement in user_achievements:
-        if achievement.mountain_completed:
-            if achievement.mountain_completed.mnt_name == mnt_name:
-                ach = achievement
+    if user_achievements:
+        for achievement in user_achievements:
+            if achievement.mountain_completed:
+                if achievement.mountain_completed.mnt_name == mnt_name:
+                    ach = achievement
+
+    ach_form = AchievementForm()
 
     context = {
         'mnt_name'   : mnt_name,
+        'ach_form'   : ach_form,
+        'chall_name' : challenge_name,
         'achievement': ach,
     }
 

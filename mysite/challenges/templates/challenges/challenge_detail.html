@@ -8,7 +8,7 @@
                 <ol>
                     {% for mountain in mountains_list %}
                         <li>
-                            <a class="a-color" href="/challenges/{{ challenge_name }}/{{ mountain.mnt_name }}">{{ mountain.mnt_name}}</a>
+                            <a class="a-color" href="{% url 'detail_mnt' challenge_name mountain.mnt_name %}">{{ mountain.mnt_name}}</a>
                         </li>
                     {% endfor %}
                 </ol>
@@ -26,7 +26,7 @@
             <div class="row justify-content-right pl-3">
                 <div class="col-4">
                     <h3>Mountains Progress:</h3>
-                </div>
+                
                 <div class="pr-2">
                     {{ mountain_progress }} %
                 </div>

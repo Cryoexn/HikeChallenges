@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'portfolio.apps.PortfolioConfig',
     'challenges.apps.ChallengesConfig',
     'users.apps.UsersConfig',
+
     'crispy_forms',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +124,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+BOOTSTRAP4 = { 
+    'include_jquery': True,
+}
 
 STATIC_URL = '/static/'
 

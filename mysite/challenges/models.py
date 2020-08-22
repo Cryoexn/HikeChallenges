@@ -7,6 +7,7 @@ class Mountain(models.Model):
     longitude = models.FloatField(default=0)
     elevation = models.IntegerField(default=0)
     distance = models.IntegerField(default=0)
+    objects = models.Manager()
 
     def __str__(self):
         return self.mnt_name
@@ -14,6 +15,7 @@ class Mountain(models.Model):
 class Challenge(models.Model):
     challenge_name = models.CharField(max_length=101)
     mountains = models.ManyToManyField(Mountain)
+    objects = models.Manager()
     
     def __str__(self):
         return self.challenge_name

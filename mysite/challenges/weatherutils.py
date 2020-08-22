@@ -29,48 +29,55 @@ def get_precip(detailedForecast):
 
 def get_weather(longitude, latitude):
 
-    properties = json.loads(requests.get('https://api.weather.gov/points/%f,%f' % (longitude, latitude)).text)['properties']
+    try:
+        properties = json.loads(requests.get('https://api.weather.gov/points/%f,%f' % (longitude, latitude)).text)['properties']
 
-    if properties:
-        forecast_url  = properties['forecast']
-        hForecase_url = properties['forecastHourly']
-        relative_city = properties['relativeLocation']['properties']['city']
+        if properties:
+            forecast_url  = properties['forecast']
+            hForecase_url = properties['forecastHourly']
+            relative_city = properties['relativeLocation']['properties']['city']
 
-        response = requests.get(forecast_url)
+            response = requests.get(forecast_url)
 
-        if response:
-            forecast = json.loads(response.text)['properties']['periods']
+            if response:
+                forecast = json.loads(response.text)['properties']['periods']
 
-            curr_days   = []
-            week_days   = []
-            week_nights = []
+                curr_days   = []
+                week_days   = []
+                week_nights = []
 
-            # Change the string appearance.
-            # Replace Night with N.
-            for day in forecast:
-                if day['name'] != "Today":
-                    day['name'] = day['name'].replace("day", "")
+                # Change the string appearance.
+                # Replace Night with N.
+                for day in forecast:
+                    if day['name'] != "Today":
+                        day['name'] = day['name'].replace("day", "")
 
-                if "Wednes" in day['name']:
-                    day['name'] = day['name'].replace("nes", "")
+                    if "Wednes" in day['name']:
+                        day['name'] = day['name'].replace("nes", "")
+                    
+                    if "Satur" in day['name']:
+                        day['name'] = day['name'].replace("ur", "")
+
+                    day['windSpeed'] = day['windSpeed'].replace(" to ", "-")
+
+                    if day['name'] == "Today" or day['name'] == "Tonight" or day['name'] == "This Afternoon":
+                        curr_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
+                    elif "Night" in day['name']:
+                        day['name'] = day['name'].replace("Night", "N")
+                        week_nights.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
+                    else:
+                        week_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
                 
-                if "Satur" in day['name']:
-                    day['name'] = day['name'].replace("ur", "")
-
-                day['windSpeed'] = day['windSpeed'].replace(" to ", "-")
-
-                if day['name'] == "Today" or day['name'] == "Tonight" or day['name'] == "This Afternoon":
-                    curr_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
-                elif "Night" in day['name']:
-                    day['name'] = day['name'].replace("Night", "N")
-                    week_nights.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
-                else:
-                    week_days.append(WeatherDay(day['name'], get_precip(day['detailedForecast']), day['temperature'], day['windSpeed'], day['windDirection'], day['detailedForecast'], hForecase_url))
+                result = (curr_days, week_days, week_nights, relative_city)
+                
+            else:
+                return "No response from second api request."
         else:
-            return None
-    else:
-        return None
+            return "No response from first api request."
 
-    return (curr_days, week_days, week_nights, relative_city)
+    except:
+        result = "Json was invalid."
+
+    return result
 
     

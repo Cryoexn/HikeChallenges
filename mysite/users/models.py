@@ -7,12 +7,12 @@ class Achievement(models.Model):
     mountain_completed = models.ForeignKey(Mountain, on_delete=models.CASCADE, default=None, blank=True, null=True)
     challenge_completed = models.ForeignKey(Challenge, on_delete=models.CASCADE, default=None, blank=True, null=True)
     date_completed = models.DateTimeField(blank=True, null=True, default=None)
+    objects = models.Manager()
 
     def __str__(self):
-
         if self.mountain_completed:
             attr = self.mountain_completed
         else:
             attr = self.challenge_completed
             
-        return f'{self.user.username}, {attr}'
+        return f'{self.user}, {attr}'
