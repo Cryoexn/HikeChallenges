@@ -71,12 +71,12 @@ def get_weather(longitude, latitude):
                 result = (curr_days, week_days, week_nights, relative_city)
                 
             else:
-                return "No response from second api request."
+                return "No response from second api request"
         else:
-            return "No response from first api request."
+            return "No response from first api request"
 
     except:
-        result = "Json was invalid."
+        result = "Json was invalid"
 
     return result
 
