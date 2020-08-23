@@ -3,91 +3,19 @@
 
 <script type="text/javascript" src="/static/challenges/pie-chart.js"></script>
 
-<style>
-  .progress-pie-chart {
-    width:200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: #e5e5e538;
-    position: relative;
-}
-    
-.progress-pie-chart.gt-50 {
-    background-color: #81CE97;
-}
-    
-.ppc-progress {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    left: calc(50% - 100px);
-    top: calc(50% - 100px);
-    width: 200px;
-    height: 200px;
-    clip: rect(0, 200px, 200px, 100px);
-}
-    
-.ppc-progress .ppc-progress-fill {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    left: calc(50% - 100px);
-    top: calc(50% - 100px);
-    width: 200px;
-    height: 200px;
-    clip: rect(0, 100px, 200px, 0);
-    background: #81CE97;
-    transform: rotate(60deg);
-}
-
-.gt-50 .ppc-progress {
-    clip: rect(0, 100px, 200px, 0);
-}
-
-.gt-50 .ppc-progress .ppc-progress-fill {
-    clip: rect(0, 200px, 200px, 100px);
-    background: #E5E5E5;
-}
-    
-.ppc-percents {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    left: calc(50% - 173.91304px/2);
-    top: calc(50% - 173.91304px/2);
-    width: 173.91304px;
-    height: 173.91304px;
-    background: #fff;
-    text-align: center;
-    display: table;
-}
-
-.ppc-percents span {
-    display: block;
-    font-size: 2.6em;
-    font-weight: bold;
-    color: #81CE97;
-}
-    
-.pcc-percents-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-    
-.progress-pie-chart-mnt, .progress-pie-chart-elv, .progress-pie-chart-dist {
-    margin: 50px auto 0;
-}
-</style>
-
 <div class="row justify-content-center">
   <div class="col-md-12 col-lg-4">
     <div class="content-section">
       {% if mountains_list %}
-        <h2 class="border-bottom border-dark">{{ challenge_name }} Mountain List</h2>
+        <h2 class="text-muted-slight border-bottom border-dark">{{ challenge_name }} Mountain List</h2>
         <ol>
           {% for mountain in mountains_list %}
             <li>
-              <a class="a-color" href="{% url 'detail_mnt' challenge_name mountain.mnt_name %}">{{ mountain.mnt_name }}</a>
+              {% if mountain in completed_mountains %}
+                <a class="a-color" href="{% url 'detail_mnt' challenge_name mountain.mnt_name %}"><del>{{ mountain.mnt_name }}</del></a>
+              {% else %}
+                <a class="a-color font-weight-bold" href="{% url 'detail_mnt' challenge_name mountain.mnt_name %}">{{ mountain.mnt_name }}</a>
+              {% endif %}
             </li>
           {% endfor %}
         </ol>
@@ -96,57 +24,75 @@
       {% endif %}
     </div>
   </div>
-  <div class="col-md-12 col-lg-8">
+  <div class="col-md-12 col-lg-5">
     <div class="content-section">
       <div class="row pl-3">
-        <h2 class="border-bottom border-dark">{{ challenge_name }} Summary</h2>
+        <h2 class="border-bottom border-dark text-muted-slight">{{ challenge_name }} Summary</h2>
       </div>
       {% if user.is_authenticated %}
-        <div class="row justify-content-center">
-          <div class="col-4">
-            <div id="mnt-chart" class="progress-pie-chart" data-percent="0">
-              <div class="ppc-progress">
-                <div id="mnt-fill" class="ppc-progress-fill"></div>
-              </div>
-              <div id="mnt-percents" class="ppc-percents">
-                <div class="pcc-percents-wrapper">
-                  <span>%</span>
-                </div>
-              </div>
+          <div class="row">
+            <div class="col-4 pt-4">
+              <h3 class="text-muted-slight">Mountain Stats</h3>
+              <p class="font-weight-bold pl-1">
+                {{ mountain_frac }} <small class="text-muted-slight">mnts</small>
+              </p>
             </div>
-            <progress style="display: none" id="progress_bar_mnt" value="{{ mountain_pct }}" max="100"></progress>
-            <h3>Mountains</h3>
-          </div>
-
-          <div class="col-4">
-            <div id="elv-chart" class="progress-pie-chart" data-percent="0">
-              <div class="ppc-progress">
-                <div id="elv-fill" class="ppc-progress-fill"></div>
-              </div>
-              <div id="elv-percents" class="ppc-percents">
-                <div class="pcc-percents-wrapper">
-                  <span>%</span>
+            <div class="col-4 my-auto pt-4">
+              <div id="mnt-chart" class="progress-pie-chart" data-percent="0">
+                <div class="ppc-progress">
+                  <div id="mnt-fill" class="ppc-progress-fill"></div>
                 </div>
-              </div>
-            </div>
-            <progress style="display: none" id="progress_bar_elv" value="{{ elevation_pct }}" max="100"></progress>
-            <h3>Elevation</h3>
-          </div>
-          <div class="col-4">
-                <div id="dist-chart" class="progress-pie-chart" data-percent="0">
-                  <div class="ppc-progress">
-                    <div id="dist-fill" class="ppc-progress-fill"></div>
-                  </div>
-                  <div id="dist-percents" class="ppc-percents">
-                    <div class="pcc-percents-wrapper">
-                      <span>%</span>
-                    </div>
+                <div id="mnt-percents" class="ppc-percents">
+                  <div class="pcc-percents-wrapper">
+                    <span>%</span>
                   </div>
                 </div>
-                <progress style="display: none" id="progress_bar_dist" value="{{ distance_pct }}" max="100"></progress>
-            <h3>Distance</h3>
+              </div>
+              <progress style="display: none" id="progress_bar_mnt" value="{{ mountain_pct }}" max="100"></progress>
+            </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="col-4 pt-4">
+              <h3 class="text-muted-slight">Elevation Stats</h3>
+              <p class="font-weight-bold pl-1">
+                {{ elevation_frac }} <small class="text-muted-slight">ft</small>
+              </p>
+            </div>
+            <div class="col-4 my-auto pt-4">
+              <div id="elv-chart" class="progress-pie-chart" data-percent="0">
+                <div class="ppc-progress">
+                  <div id="elv-fill" class="ppc-progress-fill"></div>
+                </div>
+                <div id="elv-percents" class="ppc-percents">
+                  <div class="pcc-percents-wrapper">
+                    <span>%</span>
+                  </div>
+                </div>
+              </div>
+              <progress style="display: none" id="progress_bar_elv" value="{{ elevation_pct }}" max="100"></progress>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 pt-4 pb-4">
+              <h3 class="text-muted-slight">Distance</h3>
+              <p class="font-weight-bold pl-1">
+                {{ distance_frac }} <small class="text-muted-slight">mi</small>
+              </p>
+            </div>
+            <div class="col-4 my-auto pt-4 pb-4">
+              <div id="dist-chart" class="progress-pie-chart" data-percent="0">
+                <div class="ppc-progress">
+                  <div id="dist-fill" class="ppc-progress-fill"></div>
+                </div>
+                <div id="dist-percents" class="ppc-percents">
+                  <div class="pcc-percents-wrapper">
+                    <span>%</span>
+                  </div>
+                </div>
+              </div>
+              <progress style="display: none" id="progress_bar_dist" value="{{ distance_pct }}" max="100"></progress>
+            </div>
+          </div>
       {% else %}
         <div>
           Login to see your progression for this challenge.

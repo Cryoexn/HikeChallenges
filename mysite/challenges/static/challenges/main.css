@@ -11,7 +11,7 @@
   ul {
     margin: 0;
   }
-  
+
   .bg-steel {
     background-color: #5f788abe;
   }
@@ -39,8 +39,12 @@
     color: #000000;
   }
 
+  .text-muted-slight {
+    color: rgb(71, 71, 71);
+  }
+
   .content-section {
-    background: #e9e9e98f;
+    background: #e0e0e091;
     padding: 10px 20px;
     border: 1px solid #5f788a;
     border-radius: 3px;
@@ -48,7 +52,7 @@
   }
   
   .content-section-light {
-    background: #fffafa46;
+    background: #fffafa9f;
     padding: 10px 20px;
     border: 1px solid #5f788a;
     border-radius: 3px;
@@ -130,3 +134,74 @@
   .bg-day-inner {
     background-color:#3688a3dc;
   }
+
+  .progress-pie-chart {
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #e5e5e538;
+    position: relative;
+}
+    
+.progress-pie-chart.gt-50 {
+    background-color: #81CE97;
+}
+    
+.ppc-progress {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    clip: rect(0, 200px, 200px, 100px);
+}
+    
+.ppc-progress .ppc-progress-fill {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    clip: rect(0, 100px, 200px, 0);
+    background: #68d386;
+    transform: rotate(60deg);
+}
+
+.gt-50 .ppc-progress {
+    clip: rect(0, 100px, 200px, 0);
+}
+
+.gt-50 .ppc-progress .ppc-progress-fill {
+    clip: rect(0, 200px, 200px, 100px);
+    background: #E5E5E5;
+}
+    
+.ppc-percents {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - 173.91304px/2);
+    top: calc(50% - 173.91304px/2);
+    width: 173.91304px;
+    height: 173.91304px;
+    background: rgb(231, 231, 231);
+    text-align: center;
+    display: table;
+}
+
+.ppc-percents span {
+    display: block;
+    font-size: 2.6em;
+    font-weight: bold;
+    color: #81CE97;
+}
+    
+.pcc-percents-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+    

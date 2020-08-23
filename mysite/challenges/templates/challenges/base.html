@@ -16,10 +16,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'challenges/main.css' %}">
-    
-    <style type="text/css">
+
+    <title>Hike Challenges</title>
+
+    <style>
       .background-img {
-        background-image: url("{% static 'challenges/images/mnt.jpg' %}");
+        background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) ), url("{% static 'challenges/images/mnt.jpg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -27,9 +29,7 @@
         background-attachment: fixed;
       }
     </style>
-
-    <title>Hike Challenges</title>
-
+  
   </head>
 
   <body class="background-img">

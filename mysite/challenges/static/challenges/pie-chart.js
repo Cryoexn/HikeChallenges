@@ -2,7 +2,7 @@
 $(document).ready(function() {
     var mnt_progressbar = $('#progress_bar_mnt');
     mnt_max = mnt_progressbar.attr('max');
-    mnt_time = (1000 / mnt_max) * 2;
+    mnt_time = (1000 / mnt_max) * 8;
     mnt_value = mnt_progressbar.val();
     mnt_current_pct = mnt_progressbar.val();
 
@@ -33,7 +33,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     var elv_progressbar = $('#progress_bar_elv');
     elv_max = elv_progressbar.attr('max');
-    elv_time = (1000 / elv_max) * 2;
+    elv_time = (1000 / elv_max) * 6;
     elv_value = elv_progressbar.val();
     elv_current_pct = elv_progressbar.val();
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     var dist_progressbar = $('#progress_bar_dist');
     dist_max = dist_progressbar.attr('max');
-    dist_time = (1000 / dist_max) * 2;
+    dist_time = (1000 / dist_max) * 4;
     dist_value = dist_progressbar.val();
     dist_current_pct = dist_progressbar.val();
 
