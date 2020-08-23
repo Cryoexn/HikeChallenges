@@ -139,7 +139,7 @@
     width:200px;
     height: 200px;
     border-radius: 50%;
-    background-color: #e5e5e538;
+    background-color: #55555538;
     position: relative;
 }
     
@@ -188,7 +188,7 @@
     top: calc(50% - 173.91304px/2);
     width: 173.91304px;
     height: 173.91304px;
-    background: rgb(231, 231, 231);
+    background: rgb(71, 71, 71);
     text-align: center;
     display: table;
 }
@@ -197,7 +197,7 @@
     display: block;
     font-size: 2.6em;
     font-weight: bold;
-    color: #81CE97;
+    color: #ffffff;
 }
     
 .pcc-percents-wrapper {
