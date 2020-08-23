@@ -1,4 +1,10 @@
 {% extends "challenges/base.html" %}
+
+{% block navbar-links-left %}
+  {{ block.super }}
+  <a class="nav-item nav-link" href="{% url 'detail_chall' challenge_name %}">{{ challenge_name }}</a>
+{% endblock navbar-links-left %}
+
 {% block content %}
 <div class="container-fluid">
   {% if mountain %}
@@ -26,7 +32,7 @@
           <div class="row padding justify-content-center">  <!-- Today and Tonight row -->
             {% for day in curr_days %}
               {% if day.name == "Today" or day.name == "This Afternoon" %}
-                <div class="content-section col-sm-12 col-lg-4 text-white m-1 bg-day-outer">
+                <div class="content-section col-sm-12 col-lg-4 text-white m-1 bg-day-outer shadow-lg">
                   <h3 class="border-bottom text-white">{{ day.name }}</h3>
                   <ul class="list-group">
                     <li class="list-group-item bg-day-inner">
@@ -47,7 +53,7 @@
                   </ul>
                 </div>
                   {% elif day.name == "Tonight" %}
-                  <div class="content-section col-sm-12 col-lg-4 text-white m-1 bg-night-outer">
+                  <div class="content-section col-sm-12 col-lg-4 text-white m-1 bg-night-outer shadow-lg">
                     <h3 class="border-bottom text-white">{{ day.name }}</h3>
                     <ul class="list-group">
                       <li class="list-group-item bg-night-inner">
@@ -72,7 +78,7 @@
           </div>
           <div class="row padding justify-content-center">  <!-- Weekdays row -->
             {% for day in week_days %}
-              <div class="content-section col-sm-12 col-md-2 col-lg-2 col-xl-1 text-white m-1 bg-day-outer">
+              <div class="content-section col-sm-12 col-md-2 col-lg-2 col-xl-1 text-white m-1 bg-day-outer shadow-lg">
                 <h3 class="border-bottom text-white">{{ day.name }}</h3>
                 <ul class="list-group">
                   <li class="list-group-item bg-day-inner"><p class="border-bottom m-0">temp</p>{{ day.temp }} F</li>
@@ -88,7 +94,7 @@
           </div>
           <div class="row padding justify-content-center">  <!-- Weeknights row -->
               {% for night in week_nights %}
-              <div class="content-section col-sm-12 col-md-2 col-lg-2 col-xl-1 text-white m-1 bg-night-outer">
+              <div class="content-section col-sm-12 col-md-2 col-lg-2 col-xl-1 text-white m-1 bg-night-outer shadow-lg mb-5">
                   <h3 class="border-bottom text-white">{{ night.name }}</h3>
                   <ul class="list-group">
                       <li class="list-group-item bg-night-inner"><p class="border-bottom m-0">temp</p>{{ night.temp }} F</li>

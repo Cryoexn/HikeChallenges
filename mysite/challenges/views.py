@@ -79,18 +79,17 @@ def challenge_detail_view(request, challenge_name):
             else:
                 dist_progress_pct = 0
 
-            if total_elv != 0 and total_mnts != 0:
-                context = {
-                    'mountain_pct' : mnt_progress_pct,
-                    'mountain_frac': f"{mnt_count} / {total_mnts}",
-                    'elevation_pct' : elv_progress_pct,
-                    'elevation_frac': f"{elv_count} / {total_elv}",
-                    'distance_pct' : dist_progress_pct,
-                    'distance_frac' : f"{dist_count} / {total_dist}",
-                    'challenge_name' : challenge_name,
-                    'mountains_list' : mountain_list,
-                    'completed_mountains': completed_mountains,
-                }
+            context = {
+                'mountain_pct' : mnt_progress_pct,
+                'mountain_frac': f"{mnt_count} / {total_mnts}",
+                'elevation_pct' : elv_progress_pct,
+                'elevation_frac': f"{elv_count} / {total_elv}",
+                'distance_pct' : dist_progress_pct,
+                'distance_frac' : f"{dist_count} / {total_dist}",
+                'challenge_name' : challenge_name,
+                'mountains_list' : mountain_list,
+                'completed_mountains': completed_mountains,
+            }
     else:
         messages.warning(request, 'You need to be logged in to view mountain details. You will be redirected to login page.')
 

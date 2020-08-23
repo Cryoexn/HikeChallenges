@@ -35,8 +35,24 @@
     right: 0;
   }
 
-  .a-color {
-    color: #000000;
+  .mnt-link {
+    color: #1f1f1f;
+  }
+
+  .mnt-link:hover {
+    color: rgb(71, 71, 71);
+    background-color: #6c757da6;
+    text-decoration: none;
+  }
+
+  .chall-link {
+    color: #1f1f1f;
+  }
+
+  .chall-link:hover {
+    color: rgb(71, 71, 71);
+    background-color: #6c757da6;
+    text-decoration: none;
   }
 
   .text-muted-slight {
@@ -191,6 +207,7 @@
     background: rgb(71, 71, 71);
     text-align: center;
     display: table;
+    background-image: radial-gradient(closest-side,rgb(58, 58, 58), rgb(78, 78, 78));
 }
 
 .ppc-percents span {
