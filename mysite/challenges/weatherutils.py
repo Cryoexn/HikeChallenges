@@ -12,7 +12,7 @@ class WeatherDay:
         self.hourly_url = hurl
 
     def get_hourly(self):
-        response = requests.get(hourly_url)
+        return requests.get(self.hourly_url)
 
 def get_precip(detailedForecast):
 

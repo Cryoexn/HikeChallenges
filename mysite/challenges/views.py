@@ -38,40 +38,50 @@ def challenge_detail_view(request, challenge_name):
     if request.user.is_authenticated:
         ach_list = Achievement.objects.filter(user=request.user)
     
-    mnt_progress = 0
-    elv_progress = 0
-    dis_progress = 0
+    mnt_count = 0
+    elv_count = 0
+    dist_count = 0
 
-    total_elv = 0
-    total_dis = 0
+    total_mnts = len(mountain_list)
+    total_elv  = 0
+    total_dist  = 0
 
     if ach_list:
         for ach in ach_list:
             if ach.mnt_completed:
                 for mountain in mountain_list:
                     total_elv += mountain.elevation
-                    total_dis += mountain.distance
+                    total_dist += mountain.distance
                     if ach.mnt_completed.mnt_name == mountain.mnt_name:
-                        mnt_progress += 1
-                        elv_progress += mountain.elevation
-                        dis_progress += mountain.distance 
+                        mnt_count += 1
+                        elv_count += mountain.elevation
+                        dist_count += mountain.distance 
 
         if len(mountain_list) > 0:
-            mnt_progress = round((mnt_progress / len(mountain_list)) * 100)
+            mnt_progress_pct = round((mnt_count / len(mountain_list)) * 100)
+        else:
+            mnt_progress_pct = 0
 
         if total_elv > 0:    
-            elv_progress = round((elv_progress / total_elv) * 100)
+            elv_progress_pct = round((elv_count / total_elv) * 100)
+        else:
+            elv_progress_pct = 0
 
-        if total_dis > 0:
-            dis_progress = round((dis_progress / total_dis) * 100)
+        if total_dist > 0:
+            dist_progress_pct = round((dist_count / total_dist) * 100)
+        else:
+            dist_progress_pct = 0
 
     if not request.user.is_authenticated:
         messages.warning(request, 'You need to be logged in to view mountain details. You will be redirected to login page.')
 
     context = {
-        'mountain_progress' : mnt_progress,
-        'elevation_progress' : elv_progress,
-        'distance_progress' : dis_progress,
+        'mountain_pct' : mnt_progress_pct,
+        'mountain_frac': f"{mnt_progress_pct} / {total_mnts}",
+        'elevation_pct' : elv_progress_pct,
+        'elevation_frac': f"{elv_count} / {total_elv}",
+        'distance_pct' : dist_progress_pct,
+        'distance_frac' : f"{dist_count} / {total_dist}",
         'challenge_name' : challenge_name,
         'mountains_list' : mountain_list,
     }
