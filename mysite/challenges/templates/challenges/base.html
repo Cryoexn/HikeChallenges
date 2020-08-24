@@ -21,7 +21,7 @@
 
     <style>
       .background-img {
-        background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) ), url("{% static 'challenges/images/mnt.jpg' %}");
+        background: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65) ), url("{% static 'challenges/images/mnt.jpg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -71,7 +71,7 @@
           {% if messages %}
             {% for message in messages %}
               <div class="col-12">
-                <div class="content-section">
+                <div class="content-section-warning">
                   <div class="row justify-content-center">
                     {{ message }}
                   </div>

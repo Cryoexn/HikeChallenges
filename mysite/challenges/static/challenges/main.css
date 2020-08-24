@@ -8,8 +8,25 @@
     color: #444444;
   }
 
+  h1.light {
+      color: rgb(211, 211, 211);
+  }
+
   ul {
     margin: 0;
+  }
+
+  div.scroll {
+      overflow-y: scroll;
+      max-height: 717px;
+  }
+
+  .light-text {
+    color: #fff;
+  }
+
+  .darker-text {
+    color: #444444;
   }
 
   .bg-steel {
@@ -36,12 +53,22 @@
   }
 
   .mnt-link {
-    color: #1f1f1f;
+    color: #131313;
   }
 
   .mnt-link:hover {
-    color: rgb(71, 71, 71);
-    background-color: #6c757da6;
+    color: rgb(63, 63, 63);
+    background-color: #7a7a7a;
+    text-decoration: none;
+  }
+
+  .mnt-link-done {
+    color: #d3d3d3;
+  }
+
+  .mnt-link-done:hover {
+    color: #bbbbbb;
+    background-color: #7a7a7a;
     text-decoration: none;
   }
 
@@ -56,7 +83,7 @@
   }
 
   .text-muted-slight {
-    color: rgb(71, 71, 71);
+    color: rgb(177, 177, 177);
   }
 
   .content-section {
@@ -68,17 +95,18 @@
   }
   
   .content-section-light {
-    background: #fffafa9f;
+    background: #fffafa42;
     padding: 10px 20px;
-    border: 1px solid #5f788a;
+    border: 1px solid #838383;
     border-radius: 3px;
     margin-bottom: 20px;
   }
 
   .content-section-warning {
-    background: #ff9393be;
+    color: rgb(70, 70, 70);
+    background: #ffa4a496;
     padding: 10px 20px;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #db7c7c;
     border-radius: 3px;
     margin-bottom: 20px;
   }

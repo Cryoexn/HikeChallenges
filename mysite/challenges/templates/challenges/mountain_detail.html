@@ -8,12 +8,11 @@
 {% block content %}
 <div class="container-fluid">
   {% if mountain %}
-    <h1 class="border-bottom border-dark light-header" style="color: #424242">{{ mountain.mnt_name }}, {{ rel_city }}</h1>
+    <h1 class="border-bottom border-light light">{{ mountain.mnt_name }}, {{ rel_city }} {{mountain.longitude}}, {{mountain.latitude}}</h1>
     <div class="row justify-content-center">
       <div class="content-section col-sm-12 col-md-12 col-lg-6">
         <h3 class="border-bottom">Hike Information</h3> 
         <ul>
-          <li>Peak Location: ({{mountain.longitude}},{{mountain.latitude}})</li>
           <li>Elevation: {{ mountain.elevation }}</li>
           <li>Distance: {{ mountain.distance }}</li>
           <li>Date Completed: {{ date_completed }}</li>
