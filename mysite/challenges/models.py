@@ -6,7 +6,8 @@ class Mountain(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
     elevation = models.IntegerField(default=0)
-    distance = models.IntegerField(default=0)
+    distance = models.FloatField(default=0)
+    duration = models.FloatField(default=0)
     objects = models.Manager()
 
     def __str__(self):
