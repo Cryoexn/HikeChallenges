@@ -81,11 +81,11 @@ def challenge_detail_view(request, challenge_name):
 
             context = {
                 'mountain_pct' : mnt_progress_pct,
-                'mountain_frac': f"{mnt_count} / {total_mnts}",
+                'mountain_frac': "{:,} / {:,}".format(mnt_count, total_mnts),
                 'elevation_pct' : elv_progress_pct,
-                'elevation_frac': f"{elv_count} / {total_elv}",
+                'elevation_frac': "{:,} / {:,}".format(elv_count, total_elv),
                 'distance_pct' : dist_progress_pct,
-                'distance_frac' : f"{dist_count} / {total_dist}",
+                'distance_frac' : "{:,} / {:,}".format(dist_progress_pct, total_dist),
                 'challenge_name' : challenge_name,
                 'mountains_list' : mountain_list,
                 'completed_mountains': completed_mountains,
