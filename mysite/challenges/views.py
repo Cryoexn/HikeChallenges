@@ -52,12 +52,13 @@ def challenge_detail_view(request, challenge_name):
     if request.user.is_authenticated:
         ach_list = Achievement.objects.filter(user=request.user)
         completed_mountains = []
+        
         if ach_list:
-            for ach in ach_list:
-                if ach.mnt_completed:
-                    for mountain in mountain_list:
-                        total_elv += mountain.elevation
-                        total_dist += mountain.distance
+            for mountain in mountain_list:
+                total_elv += mountain.elevation
+                total_dist += mountain.distance
+                for ach in ach_list:
+                    if ach.mnt_completed:
                         if ach.mnt_completed.mnt_name == mountain.mnt_name:
                             completed_mountains.append(ach.mnt_completed)
                             mnt_count += 1
