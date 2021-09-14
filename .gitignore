@@ -1,0 +1,7 @@
+#apikey
+db.sqlite3
+config.py
+settings.py
+py_scripts/
+hikeapp/
+*.pyc

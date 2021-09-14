@@ -1,0 +1,55 @@
+<!-- Home Page -->
+
+{% extends "portfolio/base.html" %}
+{% block content %}
+	<div class="row justify-content-center">
+
+		<div class="container col-sm-12 col-md-11">
+			<h3 class="my-4">Projects
+				<small></small>
+			</h3>
+			<div class="row ml-2">
+				{% for project in projects %}
+					<div class="col-lg-4 col-sm-6 mb-4">
+						<div class="card h-100">
+							<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+							<div class="card-body">
+							<h4 class="card-title">
+								<a href="{{ project.repo_link }}">{{ project.name }}</a>
+							</h4>
+							<p class="card-text">{{ project.desc }}</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-9">
+			<h3>About Me</h3>
+			<p class="ml-2">
+				I am currently a Computer Science student at Rochester Institute of Technology
+				I enjoy writing code and learning new technologies to expand my knowledge in software.
+				I have also taken an interest in Arch Linux and i3 window manager and have been experimenting
+				with different distributions. I have written a few personal projects for practice including this
+				portfolio website using Django framework along with bootstrap for styling. I am always prepared 
+				and excited to learn new things.
+			</p>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+			<div class="content-section">
+				<h3>Web Apps</h3>
+				<p class='text-muted'>
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-light">
+						<a href="{% url 'index_chall' %}">Hike Challenge App</a>
+					</li>
+				</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

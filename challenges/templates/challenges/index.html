@@ -1,0 +1,18 @@
+{% extends "challenges/base.html" %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-4">
+            <div class="content-section">
+                {% if challenge_list %}
+                    <ul>
+                        {% for challenge in challenge_list %}
+                            <li><a class="chall-link rounded px-2" href="{% url 'detail_chall' challenge.challenge_name %}">{{ challenge.challenge_name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No Challenges available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,107 @@
+{% extends "challenges/base.html" %}
+
+{% block navbar-links-left %}
+  {{ block.super }}
+  <a class="nav-item nav-link" href="{% url 'detail_chall' challenge_name %}">{{ challenge_name }}</a>
+{% endblock navbar-links-left %}
+
+{% block content %}
+<script type="text/javascript" src="/static/challenges/pie-chart.js"></script>
+
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-4">
+    <div>
+      {% if mountains_list %}
+        <h1 class="text-muted-slight border-bottom border-light">{{ challenge_name }} Mountain List</h1>
+        <div class="scroll">
+          <ol class="text-muted-slight">
+            {% for mountain in mountains_list %}
+              <li>
+                {% if mountain in completed_mountains %}
+                  <h3><a class="mnt-link-done rounded px-1" href="{% url 'detail_mnt' challenge_name mountain.mnt_name %}"><del>{{ mountain.mnt_name }}</del></a></h3>
+                {% else %}
+                  <h3><a class="mnt-link rounded px-1" href="{% url 'detail_mnt' challenge_name mountain.mnt_name %}">{{ mountain.mnt_name }}</a></h3>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
+      {% else %}
+        <p>No Mountains To Display.</p>
+      {% endif %}
+    </div>
+  </div>
+  {% if user.is_authenticated %}
+    <div class="col-md-12 col-lg-5">
+      <div class="ml-4">
+        <div class="row pl-3">
+          <h1 class="text-muted-slight">Stats</h1>
+        </div>
+      <div class="row">
+        <div class="col-4 pt-4">
+          <h2 class="text-muted-slight font-weight-bold">Mountains</h2>
+          <h3 class="light-text pl-1">
+            {{ mountain_frac }} <small class="text-muted-slight">mnts</small>
+          </h3>
+        </div>
+        <div class="col-4 my-auto pt-4">
+          <div id="mnt-chart" class="progress-pie-chart" data-percent="0">
+            <div class="ppc-progress">
+              <div id="mnt-fill" class="ppc-progress-fill"></div>
+            </div>
+            <div id="mnt-percents" class="ppc-percents aqua-gradient shadow-lg rounded-circle">
+              <div class="pcc-percents-wrapper">
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <progress style="display: none" id="progress_bar_mnt" value="{{ mountain_pct }}" max="100"></progress>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 pt-4">
+          <h2 class="text-muted-slight font-weight-bold">Elevation</h2>
+          <h3 class="light-text pl-1">
+            {{ elevation_frac }} <small class="text-muted-slight">ft</small>
+          </h3>
+        </div>
+        <div class="col-4 my-auto pt-4">
+          <div id="elv-chart" class="progress-pie-chart" data-percent="0">
+            <div class="ppc-progress">
+              <div id="elv-fill" class="ppc-progress-fill"></div>
+            </div>
+            <div id="elv-percents" class="ppc-percents shadow-lg rounded-circle">
+              <div class="pcc-percents-wrapper">
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <progress style="display: none" id="progress_bar_elv" value="{{ elevation_pct }}" max="100"></progress>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 pt-4 pb-4">
+          <h2 class="text-muted-slight font-weight-bold">Distance</h2>
+          <h3 class="light-text pl-1">
+            {{ distance_frac }} <small class="text-muted-slight">mi</small>
+          </h3>
+        </div>
+        <div class="col-4 my-auto pt-4 pb-4">
+          <div id="dist-chart" class="progress-pie-chart" data-percent="0">
+            <div class="ppc-progress">
+              <div id="dist-fill" class="ppc-progress-fill"></div>
+            </div>
+            <div id="dist-percents" class="ppc-percents shadow-lg rounded-circle">
+              <div class="pcc-percents-wrapper">
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <progress style="display: none" id="progress_bar_dist" value="{{ distance_pct }}" max="100"></progress>
+        </div>
+      </div>
+    </div>
+  {% else %}
+  {% endif %}
+</div>
+{% endblock content %}

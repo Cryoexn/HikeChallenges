@@ -1,0 +1,252 @@
+  body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+  }
+
+  h1.light {
+      color: rgb(211, 211, 211);
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  div.scroll {
+      overflow-y: scroll;
+      max-height: 717px;
+  }
+
+  .light-text {
+    color: #fff;
+  }
+
+  .darker-text {
+    color: #444444;
+  }
+
+  .bg-steel {
+    background-color: #5f788abe;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+  
+  .half-bottom-border {
+    border-bottom: 2px soild #6e6e6e;
+    position: absolute;
+    left: 50%;
+    right: 0;
+  }
+
+  .mnt-link {
+    color: #e4e4e4;
+  }
+
+  .mnt-link:hover {
+    color: rgb(63, 63, 63);
+    background-color: #7a7a7a;
+    text-decoration: none;
+  }
+
+  .mnt-link-done {
+    color: #5c5c5c;
+  }
+
+  .mnt-link-done:hover {
+    color: #bbbbbb;
+    background-color: #7a7a7a;
+    text-decoration: none;
+  }
+
+  .chall-link {
+    color: #1f1f1f;
+  }
+
+  .chall-link:hover {
+    color: rgb(71, 71, 71);
+    background-color: #6c757da6;
+    text-decoration: none;
+  }
+
+  .text-muted-slight {
+    color: rgb(177, 177, 177);
+  }
+
+  .content-section {
+    background: #e0e0e091;
+    padding: 10px 20px;
+    border: 1px solid #5f788a;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  
+  .content-section-light {
+    background: #fffafa42;
+    padding: 10px 20px;
+    border: 1px solid #838383;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+
+  .content-section-warning {
+    color: rgb(70, 70, 70);
+    background: #ffa4a496;
+    padding: 10px 20px;
+    border: 1px solid #db7c7c;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+
+  .message-fmt {
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+  }
+
+  .article-title {
+    color: #444444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  .bg-night-outer {
+    background-color:#134063a8;
+  }
+
+  .bg-night-inner {
+    background-color:#1a6983dc;
+  }
+
+  .bg-day-outer {
+    background-color:#06afe7a8;
+  }
+
+  .bg-day-inner {
+    background-color:#3688a3dc;
+  }
+
+  .progress-pie-chart {
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #55555538;
+    position: relative;
+}
+    
+.progress-pie-chart.gt-50 {
+    background-color: #81CE97;
+}
+    
+.ppc-progress {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    clip: rect(0, 200px, 200px, 100px);
+}
+    
+.ppc-progress .ppc-progress-fill {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    clip: rect(0, 100px, 200px, 0);
+    background: #68d386;
+    transform: rotate(60deg);
+}
+
+.gt-50 .ppc-progress {
+    clip: rect(0, 100px, 200px, 0);
+}
+
+.gt-50 .ppc-progress .ppc-progress-fill {
+    clip: rect(0, 200px, 200px, 100px);
+    background: #E5E5E5;
+}
+    
+.ppc-percents {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - 173.91304px/2);
+    top: calc(50% - 173.91304px/2);
+    width: 173.91304px;
+    height: 173.91304px;
+    background: rgb(71, 71, 71);
+    text-align: center;
+    display: table;
+    background-image: radial-gradient(closest-side,rgb(58, 58, 58), rgb(78, 78, 78));
+}
+
+.ppc-percents span {
+    display: block;
+    font-size: 2.6em;
+    font-weight: bold;
+    color: #ffffff;
+}
+    
+.pcc-percents-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+    
