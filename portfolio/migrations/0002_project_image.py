@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='project',
             name='image',
-            field=models.ImageField(default='C:\\Users\\David\\Desktop\\HikeChallenges\\mysite\\portfolio\\static\\portfolio\\dft.png', upload_to='uploads/'),
+            field=models.ImageField(default='/home/davidpi/Projects/hike-challenge-app/portfolio/static/portfolio/dft.png', upload_to='uploads/'),
         ),
     ]
